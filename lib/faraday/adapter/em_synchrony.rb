@@ -18,7 +18,7 @@ module Faraday
 
       def call(env)
         super
-        request = EventMachine::HttpRequest.new(URI::parse(env[:url].to_s))
+        request = EventMachine::HttpRequest.new(URI::parse(env[:url].to_s), connect_timeout: 10, inactivity_timeout: 30)
         options = {:head => env[:request_headers]}
         options[:ssl] = env[:ssl] if env[:ssl]
 
